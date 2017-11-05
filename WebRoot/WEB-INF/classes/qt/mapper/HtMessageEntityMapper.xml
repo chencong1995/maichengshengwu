@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.HtMessageEntityMapper" >
+  <parameterMap type="qt.pojo.MessageEntity" id="in_msg"></parameterMap>
+  <resultMap type="qt.pojo.MessageEntity" id="out_msg"></resultMap>
+
+<!-- 选择信息 -->
+<select id="selectAllPlm" resultMap="out_msg">
+    SELECT * FROM gahy_message ORDER BY m_status, m_createtime DESC
+</select>
+  <!-- 更新状态 -->
+   <update id="updateById">
+     update gahy_message set m_status =1,m_htime =now() where m_id = #{mId}
+  </update>
+  
+ <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gahy_message
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gahy_message
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="qt.pojo.MessageEntity" >
+    insert into gahy_message (m_id, m_name, m_email, 
+      m_subject, m_message, m_status, 
+      m_htime, m_huser, m_createtime
+      )
+    values (#{mId,jdbcType=INTEGER}, #{mName,jdbcType=VARCHAR}, #{mEmail,jdbcType=VARCHAR}, 
+      #{mSubject,jdbcType=VARCHAR}, #{mMessage,jdbcType=VARCHAR}, #{mStatus,jdbcType=INTEGER}, 
+      #{mHtime,jdbcType=DATE}, #{mHuser,jdbcType=INTEGER}, #{mCreatetime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="qt.pojo.MessageEntity" >
+    insert into gahy_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mEmail != null" >
+        m_email,
+      </if>
+      <if test="mSubject != null" >
+        m_subject,
+      </if>
+      <if test="mMessage != null" >
+        m_message,
+      </if>
+      <if test="mStatus != null" >
+        m_status,
+      </if>
+      <if test="mHtime != null" >
+        m_htime,
+      </if>
+      <if test="mHuser != null" >
+        m_huser,
+      </if>
+      <if test="mCreatetime != null" >
+        m_createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mEmail != null" >
+        #{mEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="mSubject != null" >
+        #{mSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="mMessage != null" >
+        #{mMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mStatus != null" >
+        #{mStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mHtime != null" >
+        #{mHtime,jdbcType=DATE},
+      </if>
+      <if test="mHuser != null" >
+        #{mHuser,jdbcType=INTEGER},
+      </if>
+      <if test="mCreatetime != null" >
+        #{mCreatetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.MessageEntity" >
+    update gahy_message
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mEmail != null" >
+        m_email = #{mEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="mSubject != null" >
+        m_subject = #{mSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="mMessage != null" >
+        m_message = #{mMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mStatus != null" >
+        m_status = #{mStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mHtime != null" >
+        m_htime = #{mHtime,jdbcType=DATE},
+      </if>
+      <if test="mHuser != null" >
+        m_huser = #{mHuser,jdbcType=INTEGER},
+      </if>
+      <if test="mCreatetime != null" >
+        m_createtime = #{mCreatetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="qt.pojo.MessageEntity" >
+    update gahy_message
+    set m_name = #{mName,jdbcType=VARCHAR},
+      m_email = #{mEmail,jdbcType=VARCHAR},
+      m_subject = #{mSubject,jdbcType=VARCHAR},
+      m_message = #{mMessage,jdbcType=VARCHAR},
+      m_status = #{mStatus,jdbcType=INTEGER},
+      m_htime = #{mHtime,jdbcType=DATE},
+      m_huser = #{mHuser,jdbcType=INTEGER},
+      m_createtime = #{mCreatetime,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  
+   --> 
+</mapper>

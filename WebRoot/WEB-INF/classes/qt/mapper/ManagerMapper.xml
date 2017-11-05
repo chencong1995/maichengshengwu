@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.ManagerMapper">
+	<parameterMap type="qt.pojo.User" id="in_users"></parameterMap>
+	<resultMap type="qt.pojo.User" id="out_users"></resultMap>
+	
+    <parameterMap type="qt.form.IndexForm" id="in_idf"></parameterMap>
+	<!-- 根据Id查询 -->
+	<select id="selectById" resultMap="out_users">
+		select a.u_id,a.u_pwd, a.u_name
+		,a.u_updatetime,a.u_status,a.u_createtime,b.u_name as u_createname from gahy_user a
+		left join gahy_user b ON a.u_createUid=b.u_id where a.u_id = #{uId}
+	</select>
+
+	<!-- 根据Name查询 -->
+	<select id="selectByName" resultMap="out_users">
+		select * from gahy_user
+		where u_name = #{uName}
+	</select>
+
+
+	<!-- 查询所有 -->
+	<select id="selectAll" resultMap="out_users">
+		select a.u_id, a.u_name
+		,a.u_updatetime,a.u_status,a.u_createtime,b.u_name as u_createname from gahy_user a
+		left join gahy_user b ON a.u_createUid=b.u_id
+	</select>
+
+	<!-- 添加管理员 -->
+	<insert id="insertManager" parameterMap="in_users">
+		insert into gahy_user
+		(u_name,u_pwd,u_createtime,u_status,u_createUid,u_updatetime) values
+		(#{u_name},#{u_pwd},now(),#{u_status},#{u_createUid},now())
+	</insert>
+	
+	<!-- 删除管理员 -->
+	<delete id="deleteById">
+		delete from gahy_user where u_id = #{0}
+	</delete>
+	
+	
+	
+   <!-- 修改密码-->
+	<update id="updateById" parameterMap="in_idf" >
+		 update gahy_user set u_pwd = #{new_pwd},u_updatetime=now(),u_createUid=#{id} where u_id = #{u_id}
+   </update>
+   
+   
+    <!-- 修改状态-->
+   <update id="updateStatusById" parameterMap="in_idf" >
+		 update gahy_user set u_status = #{u_status},u_updatetime=now() where u_id = #{u_id}
+   </update>
+   
+ 
+   <!-- 更新管理员 
+   <update id="updateById" parameterMap="in_users" > 
+     update gahy_user
+      <set > 
+		     <if test="u_name != null" >
+		       u_name = #{u_name}, 
+			 </if> 
+			 <if test="u_pwd != null" > 
+			   u_pwd = #{u_pwd},
+			 </if> 
+			 <if test="u_status != null" >
+		       u_name = #{u_status}, 
+			 </if> 
+			 <if test="u_createtime != null" > 
+			   u_pwd = #{u_createtime},
+			 </if> 
+			 <if test="u_updatetime != null" >
+		       u_name = #{u_updatetime}, 
+			 </if> 
+	 </set> 
+		where u_id = #{uId} </update> 
+		  -->
+
+	<!-- <insert id="insertSelective" parameterType="qt.pojo.User" > insert 
+		into gahy_user <trim prefix="(" suffix=")" suffixOverrides="," > <if test="uId 
+		!= null" > u_id, </if> <if test="uName != null" > u_name, </if> <if test="uPwd 
+		!= null" > u_pwd, </if> </trim> <trim prefix="values (" suffix=")" suffixOverrides="," 
+		> <if test="uId != null" > #{uId,jdbcType=INTEGER}, </if> <if test="uName 
+		!= null" > #{uName,jdbcType=VARCHAR}, </if> <if test="uPwd != null" > #{uPwd,jdbcType=VARCHAR}, 
+		</if> </trim> </insert> <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.User" 
+		> update gahy_user <set > <if test="uName != null" > u_name = #{uName,jdbcType=VARCHAR}, 
+		</if> <if test="uPwd != null" > u_pwd = #{uPwd,jdbcType=VARCHAR}, </if> </set> 
+		where u_id = #{uId,jdbcType=INTEGER} </update> <update id="updateByPrimaryKey" 
+		parameterType="qt.pojo.User" > update gahy_user set u_name = #{uName,jdbcType=VARCHAR}, 
+		u_pwd = #{uPwd,jdbcType=VARCHAR} where u_id = #{uId,jdbcType=INTEGER} </update> -->
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.HtProductServiceMapper" >
+  <parameterMap type="qt.pojo.HtProductServiceEntity" id="in_service"></parameterMap>
+<resultMap type="qt.pojo.HtProductServiceEntity" id="out_service"></resultMap>
+
+
+<!-- 查询所有 -->
+  <select id="selectAll" resultMap="out_service">
+    select * from gahy_service
+  </select>
+
+
+<!-- 根据id查询 -->
+  <select id="selectById" resultMap="out_service">
+    select * from gahy_service where id=#{id}
+  </select>
+
+
+<!-- 根据id更新 -->
+  <update id="updateService" >
+   update gahy_service set edittime=now()
+   <if test="title != null and  title!=''">
+    ,title=#{title}
+   </if>
+   <if test="context != null and context!=''">
+    ,context=#{context}
+   </if>
+   <if test="imageurl != null and imageurl!=''">
+    ,imageurl=#{imageurl}
+   </if>
+    where id=#{id}
+  </update>
+  
+
+
+  <!-- 
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from gahy_service
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gahy_service
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="qt.pojo.HtService" >
+    insert into gahy_service (id, title, imageurl, 
+      edittime, context)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imageurl,jdbcType=VARCHAR}, 
+      #{edittime,jdbcType=VARCHAR}, #{context,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="qt.pojo.HtService" >
+    insert into gahy_service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imageurl != null" >
+        imageurl,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.HtService" >
+    update gahy_service
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="qt.pojo.HtService" >
+    update gahy_service
+    set title = #{title,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
+      edittime = #{edittime,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="qt.pojo.HtService" >
+    update gahy_service
+    set title = #{title,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
+      edittime = #{edittime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   -->
+</mapper>

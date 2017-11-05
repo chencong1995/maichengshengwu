@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.HtAboutUsEntityMapper" >
+  <parameterMap type="qt.pojo.HtAboutUsEntity" id="in_abt"></parameterMap>
+<resultMap type="qt.pojo.HtAboutUsEntity" id="out_abt"></resultMap>
+  
+
+<!-- 根据type查询 -->
+  <select id="selectByType" resultMap="out_abt">
+    select * from gahy_aboutus where type=#{type}
+  </select>  
+  
+  <!-- 根据id更新 -->
+  <update id="updateById" parameterMap="in_abt" >
+    update gahy_aboutus
+    <set >
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="imageurl != null" >
+        imageurl = #{imageurl},
+      </if>
+      <if test="context != null" >
+        context = #{context},
+      </if>
+      updatetime =now(),
+    </set>
+    where id = #{id}
+  </update>
+  
+  <!-- 新增新闻 -->
+   <insert id="insertNews" parameterMap="in_abt">
+    insert into gahy_aboutus (title, imageurl, 
+      type, context,updatetime)
+    values ( #{title}, #{imageurl}, 
+      3, #{context},now())
+  </insert>
+  
+  
+  <!-- 根据id查询新闻 -->
+  <select id="selectNewsById" resultMap="out_abt">
+    select * from gahy_aboutus where id=#{id}
+  </select>  
+  
+  
+    <!-- 根据id删除新闻 -->
+   <delete id="deleteNewsById">
+    delete from gahy_aboutus where type=3 and id = #{id}
+  </delete>
+  
+
+<!-- 根据title查询新闻 -->
+  <select id="selectByTitle" resultMap="out_abt">
+    select * from gahy_aboutus where title=#{title}
+  </select>  
+  
+  
+  <!-- 
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from gahy_aboutus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gahy_aboutus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="qt.pojo.HtAboutUsEntity" >
+    insert into gahy_aboutus (id, title, imageurl, 
+      updatetime, context)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imageurl,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR}, #{context,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="qt.pojo.HtAboutUsEntity" >
+    insert into gahy_aboutus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imageurl != null" >
+        imageurl,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.HtAboutUsEntity" >
+    update gahy_aboutus
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="qt.pojo.HtAboutUsEntity" >
+    update gahy_aboutus
+    set title = #{title,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="qt.pojo.HtAboutUsEntity" >
+    update gahy_aboutus
+    set title = #{title,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   -->
+</mapper>

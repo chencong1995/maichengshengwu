@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qt.mapper.HtIndexMapper"> 
+<parameterMap type="qt.pojo.IndexEntity" id="in_index"></parameterMap>
+<resultMap type="qt.pojo.IndexEntity" id="out_index"></resultMap>
+
+
+<!-- 查询图片 -->
+  <select id="sel_index_bytype" resultMap="out_index">
+   select * from gahy_index where 1=1 and type=#{type}
+  </select>
+  
+  
+  <!-- 更新选项卡logo -->
+  <update id="edit_favicon_image" >
+   update gahy_index set updatetime=now()
+   <if test="favicon_msg != null and  favicon_msg!=''">
+    ,imagemsg=#{favicon_msg}
+   </if>
+   <if test="filePath != null and filePath!=''">
+    ,imageurl=#{filePath}
+   </if>
+    where id=1
+  </update>
+  
+  
+  <!-- 更新logo -->
+  <update id="edit_logo_image" >
+   update gahy_index set updatetime=now()
+   <if test="redirectUrl != null and  redirectUrl!=''">
+    ,imagemsg=#{redirectUrl}
+   </if>
+   <if test="filePath != null and filePath!=''">
+    ,imageurl=#{filePath}
+   </if> 
+   where id=17
+  </update>
+
+  
+    
+  <!-- 更新轮播图 -->
+  <update id="edit_banaer_image" >
+   update gahy_index set imageurl=#{filePath},updatetime=now() where id=#{id}
+  </update>
+  
+  
+   <!-- 更新服务 -->
+  <update id="edit_service" >
+   update gahy_index set updatetime=now()
+   <if test="title != null and  title!=''">
+    ,title=#{title}
+   </if>
+   <if test="context != null and context!=''">
+    ,context=#{context}
+   </if>
+   <if test="imageurl != null and imageurl!=''">
+    ,imageurl=#{imageurl}
+   </if>
+    where id=#{id}
+  </update>
+  
+  <!-- 更新优势-->
+  <update id="edit_advantage" >
+   update gahy_index set title=#{title},context=#{context},updatetime=now() where id=#{id}
+  </update>
+
+
+  
+   <insert id="add_index" parameterMap="in_index">
+    insert into gahy_index (imagename,imageurl,imagemsg,title,context,type,updatetime) values (#{imagename},#{imageurl},#{imagemsg},#{title},#{context},#{type},now())
+   </insert>
+   
+   <delete id="del_index">
+     delete from gahy_index where id=#{id}
+   </delete>
+   
+   <select id="sel_index_byId" resultMap="out_index">
+    select * from gahy_index where id=#{id}
+   </select>
+   
+
+</mapper>

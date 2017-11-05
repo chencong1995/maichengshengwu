@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qt.mapper.MainMapper"> 
+<parameterMap type="qt.pojo.IndexEntity" id="in_index"></parameterMap>
+<resultMap type="qt.pojo.IndexEntity" id="out_index"></resultMap>
+  <select id="sel_index_bytype" resultMap="out_index">
+   select * from gahy_index where 1=1 and type=#{type} order by id
+  </select>
+  
+  <insert id="add_msg">
+  insert into gahy_message (m_name,m_email,m_subject,m_message,m_createtime) values (#{0},#{1},#{2},#{3},now())
+  </insert>
+</mapper>

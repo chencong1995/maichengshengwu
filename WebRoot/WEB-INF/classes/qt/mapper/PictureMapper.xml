@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="qt.pojo.Picture" >
+    <id column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="p_url" property="pUrl" jdbcType="VARCHAR" />
+    <result column="p_filepath" property="pFilepath" jdbcType="VARCHAR" />
+    <result column="p_addtime" property="pAddtime" jdbcType="DATE" />
+  </resultMap>
+  
+  
+  <!-- 图片路径存入到数据库 -->
+  <insert id="insertPic" parameterType="qt.pojo.Picture" >
+    insert into gahy_picture (p_name, p_url, 
+      p_filepath, p_addtime)
+    values (#{pName}, #{pUrl}, 
+      #{pFilepath}, #{pAddtime})
+  </insert>
+  
+    <!--查询所拥有图片 -->
+    <select id="selectAll"  resultMap="BaseResultMap">
+    select *   from gahy_picture
+  </select>
+   <!--删除图片 -->
+    <delete id="deletePic" parameterType="java.lang.Integer">
+    delete from gahy_picture
+    where p_id = #{pId}
+  </delete>
+  
+  <sql id="Base_Column_List" >
+    p_id, p_name, p_url, p_filepath, p_addtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gahy_picture
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gahy_picture
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="qt.pojo.Picture" >
+    insert into gahy_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="pName != null" >
+        p_name,
+      </if>
+      <if test="pUrl != null" >
+        p_url,
+      </if>
+      <if test="pFilepath != null" >
+        p_filepath,
+      </if>
+      <if test="pAddtime != null" >
+        p_addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pUrl != null" >
+        #{pUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pFilepath != null" >
+        #{pFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="pAddtime != null" >
+        #{pAddtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.Picture" >
+    update gahy_picture
+    <set >
+      <if test="pName != null" >
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pUrl != null" >
+        p_url = #{pUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pFilepath != null" >
+        p_filepath = #{pFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="pAddtime != null" >
+        p_addtime = #{pAddtime,jdbcType=DATE},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="qt.pojo.Picture" >
+    update gahy_picture
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_url = #{pUrl,jdbcType=VARCHAR},
+      p_filepath = #{pFilepath,jdbcType=VARCHAR},
+      p_addtime = #{pAddtime,jdbcType=DATE}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qt.mapper.HtMainMapper"> 
+
+<parameterMap type="qt.pojo.User" id="in_users"></parameterMap>
+<resultMap type="qt.pojo.User" id="out_users"></resultMap>
+
+  <select id="yz_user" parameterMap="in_users" resultMap="out_users">
+   select * from gahy_user where 1=1 and u_name=#{u_name} and u_pwd=#{u_pwd}
+  </select>
+</mapper>

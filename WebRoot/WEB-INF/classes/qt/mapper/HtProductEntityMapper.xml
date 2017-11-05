@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qt.mapper.HtProductEntityMapper" >
+     <resultMap  type="qt.pojo.HtProductTypeEntity" id="out_pdtp"></resultMap>
+    <parameterMap type="qt.pojo.HtProductTypeEntity" id="in_pdtp"></parameterMap>
+    <resultMap  type="qt.pojo.HtProductEntity" id="out_pdt"></resultMap>
+    <parameterMap type="qt.pojo.HtProductEntity" id="in_pdt"></parameterMap>
+    
+    
+     <!-- 查询所有类别 -->
+     <select id="selectAllPdtp" resultMap="out_pdtp">
+    select * from gahy_product_type
+  </select>
+  
+  <!-- 根据typename查询 -->
+     <select id="selectByTypeName" resultMap="out_pdtp">
+    select * from gahy_product_type where name=#{typeName}
+  </select>
+
+     
+     <!-- 新增类别 -->
+     <insert id="addProductType" parameterMap="in_pdtp" >
+    insert into gahy_product_type (name,updatetime)
+    values (#{name},now())
+  </insert>
+  
+   <!-- 根据id删除type -->
+    <delete id="deleteTypeById" >
+    delete from gahy_product_type where id = #{id}
+  </delete>
+  
+  
+   <!-- 查询产品 -->
+     <select id="selectAllPd" resultMap="out_pdt">
+    select * from gahy_product
+  </select>
+  
+   <!-- 根据type查询产品 -->
+     <select id="selectByType" resultMap="out_pdt">
+    select * from gahy_product where type=#{typeId}
+  </select>
+  
+  <!--新增产品 -->
+   <insert id="addpdt" parameterMap="in_pdt" >
+    insert into gahy_product (type, title, 
+      imageurl,updatetime)
+    values (#{type}, #{title}, 
+      #{imageurl},now())
+  </insert>
+       
+  <!-- 根据title查询产品 -->
+     <select id="selectByTitle" resultMap="out_pdt">
+    select * from gahy_product where title=#{title}
+  </select>      
+       
+       
+ 
+   <!-- 根据id删除产品 -->
+    <delete id="deletePdtById" >
+    delete from gahy_product where id = #{id}
+  </delete>      
+       <!-- 
+       
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gahy_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gahy_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="qt.pojo.HtProductEntity" >
+    insert into gahy_product (id, type, title, 
+      imageurl)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{imageurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="qt.pojo.HtProductEntity" >
+    insert into gahy_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imageurl != null" >
+        imageurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="qt.pojo.HtProductEntity" >
+    update gahy_product
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="qt.pojo.HtProductEntity" >
+    update gahy_product
+    set type = #{type,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   -->
+</mapper>
