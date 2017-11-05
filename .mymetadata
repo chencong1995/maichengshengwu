@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+>>>>>>> origin/master
 <project-module
   type="WEB"
   name="gahy"
   id="myeclipse.1504495849775"
   context-root="/gahy"
   j2ee-spec="6.0"
+<<<<<<< HEAD
   archive="gahy.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
 </project-module>
 
+=======
+  archive="gahy.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
+>>>>>>> origin/master
